@@ -23,7 +23,8 @@ class PickerView extends BaseComponent {
         itemHeight: 40,
         onPickerSelected: null,
         selectedIndex: 0,
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff',
+        selectedLineColor: '#E8EEF0'
     }
 
     _previousTop = 0;
@@ -285,8 +286,8 @@ class PickerView extends BaseComponent {
                 >
                     {this.renderList()}
                 </Animated.View>
-                <View style={{ position: 'absolute', width: this.props.itemWidth, height: this.mOnePixel, top: this.props.itemHeight * 4 / 2, backgroundColor: '#E8EEF0' }} />
-                <View style={{ position: 'absolute', width: this.props.itemWidth, height: this.mOnePixel, top: this.props.itemHeight * 6 / 2, backgroundColor: '#E8EEF0' }} />
+                <View style={{ position: 'absolute', width: this.props.itemWidth, height: this.mOnePixel, top: this.props.itemHeight * 4 / 2, backgroundColor: this.props.selectedLineColor }} />
+                <View style={{ position: 'absolute', width: this.props.itemWidth, height: this.mOnePixel, top: this.props.itemHeight * 6 / 2, backgroundColor: this.props.selectedLineColor }} />
                 <Svg
                     onStartShouldSetResponder={() => {
                         return false;

@@ -29,7 +29,10 @@ class AreaPicker extends BaseDialog {
         onPickerCancel: null,
         onPickerConfirm: null,
         backgroundColor: '#ffffff',
-        title: '地区'
+        title: '地区',
+        selectedLineColor: '#ffffff',
+        titleBottomColor: '#27336F',
+        titleBottomWidth: 0.5
     }
 
     constructor(props) {
@@ -118,6 +121,7 @@ class AreaPicker extends BaseDialog {
             }
             if (item && length > 0) {
                 return <PickerView
+                selectedLineColor={this.props.selectedLineColor}
                     backgroundColor={this.props.backgroundColor}
                     itemTextColor={this.props.itemTextColor}
                     itemSelectedColor={this.props.itemSelectedColor}
@@ -156,7 +160,9 @@ class AreaPicker extends BaseDialog {
                 width: this.mScreenWidth, height: this.getSize(44),
                 backgroundColor: this.props.backgroundColor, flexDirection: 'row',
                 alignItems: 'center',
-                justifyContent: 'space-between', position: 'absolute', top: 0
+                justifyContent: 'space-between', position: 'absolute', top: 0,
+                borderBottomColor: this.props.titleBottomColor,
+                borderBottomWidth: this.props.titleBottomWidth
             }}>
                 <TouchableOpacity
                     onPress={() => {
