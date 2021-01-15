@@ -27,7 +27,9 @@ class AreaPicker extends BaseDialog {
         itemSelectedColor: 0x1097D5ff,
         itemHeight: 40,
         onPickerCancel: null,
-        onPickerConfirm: null
+        onPickerConfirm: null,
+        backgroundColor: '#ffffff',
+        title: '地区'
     }
 
     constructor(props) {
@@ -116,6 +118,7 @@ class AreaPicker extends BaseDialog {
             }
             if (item && length > 0) {
                 return <PickerView
+                    backgroundColor={this.props.backgroundColor}
                     itemTextColor={this.props.itemTextColor}
                     itemSelectedColor={this.props.itemSelectedColor}
                     key={'picker' + pickerId}
@@ -138,14 +141,21 @@ class AreaPicker extends BaseDialog {
         return <View
             style={{
                 height: this.props.itemHeight * 5 + this.getSize(15) + this.getSize(44), width: this.mScreenWidth,
-                backgroundColor: '#ffffff'
+                backgroundColor: this.props.backgroundColor
             }}>
-            <View style={{ width: this.mScreenWidth, height: this.props.itemHeight * 5 + this.getSize(15), flexDirection: 'row', position: 'absolute', bottom: 0 }}>
+            <View style={{ 
+                width: this.mScreenWidth, 
+                height: this.props.itemHeight * 5 + this.getSize(15), 
+                flexDirection: 'row', 
+                position: 'absolute', 
+                backgroundColor: this.props.backgroundColor,
+                bottom: 0 }}>
                 {this.renderPicker()}
             </View>
             <View style={{
                 width: this.mScreenWidth, height: this.getSize(44),
-                backgroundColor: '#ffffff', flexDirection: 'row',
+                backgroundColor: this.props.backgroundColor, flexDirection: 'row',
+                alignItems: 'center',
                 justifyContent: 'space-between', position: 'absolute', top: 0
             }}>
                 <TouchableOpacity
@@ -157,6 +167,7 @@ class AreaPicker extends BaseDialog {
                     style={{ width: this.getSize(60), height: this.getSize(44), justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{ fontSize: this.props.cancelTextSize, fontWeight: '400', color: this.props.cancelTextColor }}>{this.props.cancelText}</Text>
                 </TouchableOpacity>
+                <Text style={[{ color: '#C8CEDA', fontSize: 16},this.props.titleStyle]}>{this.props.title}</Text>
                 <TouchableOpacity
                     onPress={() => {
                         this.dismiss(() => {

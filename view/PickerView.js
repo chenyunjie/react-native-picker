@@ -22,7 +22,8 @@ class PickerView extends BaseComponent {
         itemSelectedColor: 0x1097D5ff,
         itemHeight: 40,
         onPickerSelected: null,
-        selectedIndex: 0
+        selectedIndex: 0,
+        backgroundColor: '#ffffff'
     }
 
     _previousTop = 0;
@@ -263,16 +264,17 @@ class PickerView extends BaseComponent {
     render() {
         return <View style={{
             width: this.props.itemWidth, height: this.props.itemHeight * 5 + this.getSize(15),
-            backgroundColor: '#ffffff'
+            backgroundColor: 'red'
         }}>
             <View
                 ref={ref => this.ref = ref}
                 {...this._panResponder.panHandlers}
                 style={{
                     overflow: 'hidden',
-                    width: this.props.itemWidth, height: this.props.itemHeight * 5 + this.getSize(15), backgroundColor: '#ffffff'
+                    width: this.props.itemWidth, height: this.props.itemHeight * 5 + this.getSize(15), backgroundColor: this.props.backgroundColor
                 }}>
                 <Animated.View
+                    
                     style={{
                         transform: [
                             {
@@ -296,10 +298,6 @@ class PickerView extends BaseComponent {
                     height={this.props.itemHeight * 1}
                     width={this.props.itemWidth}
                 >
-                    <LinearGradient id="grad" x1="0" y1={this.props.itemHeight * 1} x2={0} y2="0">
-                        <Stop offset="0" stopColor="#ffffff" stopOpacity="0.2" />
-                        <Stop offset="1" stopColor="#ffffff" stopOpacity="1" />
-                    </LinearGradient>
                     <Rect
                         x="0"
                         y="0"
@@ -309,32 +307,7 @@ class PickerView extends BaseComponent {
                         clipPath="url(#clip)"
                     />
                 </Svg>
-
-                <Svg
-                    onStartShouldSetResponder={() => {
-                        return false;
-                    }}
-                    onResponderStart={() => {
-                        return false;
-                    }}
-                    style={{ position: 'absolute', bottom: this.getSize(15) }}
-                    height={this.props.itemHeight * 1}
-                    width={this.props.itemWidth}
-                >
-                    <LinearGradient id="grad" x1="0" y1={this.props.itemHeight * 1} x2={0} y2="0">
-                        <Stop offset="0" stopColor="#ffffff" stopOpacity="1" />
-                        <Stop offset="1" stopColor="#ffffff" stopOpacity="0.4" />
-                    </LinearGradient>
-                    <Rect
-                        x="0"
-                        y="0"
-                        width={this.props.itemWidth}
-                        height={this.props.itemHeight * 1}
-                        fill="url(#grad)"
-                        clipPath="url(#clip)"
-                    />
-                </Svg>
-                <View style={{ width: this.mScreenWidth, height: this.getSize(15), bottom: 0, backgroundColor: '#ffffff', position: 'absolute' }} />
+                <View style={{ width: this.mScreenWidth, height: this.getSize(15), bottom: 0, backgroundColor: this.props.backgroundColor, position: 'absolute' }} />
             </View>
 
         </View>

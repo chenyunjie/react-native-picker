@@ -15,7 +15,7 @@ export default class BaseDialog extends BaseComponent {
         removeSubviews: true,   //隐藏时，是否回收前景控件，false 更流畅，true：初始化更快，dismiss后就回收
         coverClickable: true,
         onCoverPress: null,
-        showAnimationType: 'spring'
+        showAnimationType: 'linear'
     }
 
     _path = new Animated.Value(0);
@@ -34,11 +34,13 @@ export default class BaseDialog extends BaseComponent {
 
     show(callback, state = {}) {
         this.setState({ _isShow: true, ...state }, () => {
+            console.log('this.props.showAnimationType', this.props.showAnimationType);
             if (!this.props.showAnimationType || this.props.showAnimationType == 'spring') {
                 Animated.spring(this._path, { toValue: 1 }).start(() => {
                     callback && callback();
                 });
             } else {
+                console.log('timing');
                 Animated.timing(this._path, { toValue: 1 }).start(() => {
                     callback && callback();
                 });
@@ -116,7 +118,7 @@ export default class BaseDialog extends BaseComponent {
 
                 <Animated.View style={{
                     opacity: this._path.interpolate({ inputRange: [0, 0.5, 1], outputRange: [0, 0, 1] }),
-                    transform: this._getContentInterpolate(this._path),
+                    transform: this._getContentInterpolate(this._path)
                 }}>
                     {this.renderContent()}
                 </Animated.View>
